@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<link href="https://fonts.googleapis.com/css?family=Audiowide&display=swap" rel="stylesheet">
+</head>
+<body>
+
+
+
+
+<div class="container">
+
+
+
+	<div class="menu">
+		<div class="inner-menu">
+		<h2>Космические Захватчики</h2>
+<div class="img">
+	
+		<ul><li><a href="index.html" class="myLink" onMouseOver="playAudio();">Play</a></li>
+		<li><a href="#" class="myLink" onMouseOver="playAudio();">Levels</a></li>
+		<li><a href="#" class="myLink" onMouseOver="playAudio();">Setting</a></li>
+		<li><a href="index3.html" class="myLink" onMouseOver="playAudio();">exit</a></li>
+		<li><a href="#" class="myLink"  onMouseOver="playAudio();" id="btn-play" >music</a></li>
+	</ul></div>
+	</div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+<style >
+	
+
+body{
+	padding: 0;
+	margin:0;
+	border: 0;
+}
+
+
+
+h2{
+	margin: 0;
+	padding: 0;
+	color: white;
+	color:#00b4e0;  
+	font-family: 'Audiowide', cursive;
+
+	font-weight: 600;
+	  background: #2e576b;
+	    border: solid 2px #8c9fa3;
+	    position: relative;
+    top: 46px;
+}
+.container{
+	width: 100%;
+	height: 700px;
+	background: url('img/bg.png');
+}
+
+
+
+
+.menu{
+	width: 100%;
+	height: 500px;
+}
+
+
+.inner-menu {
+	max-width: 600px;
+	max-height: 500px;
+	height: 400px;
+	width: 600px;
+	margin: 0 auto;
+
+	text-align: center;
+}
+
+
+#btn-play{
+	margin: 0  0 0 0;
+}
+
+.img {
+    background-image: url(img/kocmoc.jpg);
+    background-size: 601px 353px;
+    width: 100%;
+    height: 400px;
+    padding: 0px 0 0 0;
+    background-repeat: no-repeat;
+        margin: 47px 0 0px 0px;
+}
+
+.inner-menu li {
+list-style: none;
+    background: #2e576b;
+    width: 127px;
+    height: 26px;
+    margin: 3px 0px 0px 85px;
+    font-size: 20px;
+    opacity: 0.7;
+    border-radius: 10px;
+    border: solid 2px #8c9fa3;
+
+   
+}
+
+.inner-menu ul{
+    text-align: center;
+    width: 353px;
+    height: 203px;
+    padding: 63px 0px 0px 42px;
+    margin: 0 auto;
+}
+
+
+.inner-menu a {
+	text-decoration: none;
+	color:#00b4e0;  
+	font-family: 'Audiowide', cursive;
+
+	font-weight: 600;
+
+
+
+}
+
+
+
+
+
+
+.inner-menu li:hover {
+	  text-shadow: 1px 1px 2px #4655ff, 0 0 20px #101010, 0 0 30px #101010, 0 0 40px #101010, 0 0 50px #938cff, 0 0 60px #9052ad, 0 0 70px #9052ad;
+	border: solid 3px white;
+	border-right: 2px;
+	border-left: 2px;
+	
+	
+}
+
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+function playAudio(){
+var myAudio = new Audio;
+myAudio.src = "sound/click.wav";
+myAudio.play();
+}
+
+
+
+
+
+
+
+
+
+
+var el = document.getElementById('btn-play');
+var playing = false; // текущее состояние плеера
+
+var player = new Audio();
+player.src = 'sound/cos.wav';
+player.preload = "auto";
+player.addEventListener('ended', function(){ // слушаем окончание трека
+ 
+  playing = true;
+});
+el.addEventListener('click', playPause); // слушаем нажатие на кнопку
+
+function playPause() {
+  if( playing) {
+    player.pause();
+    el.innerText = "music:off";
+  } else {
+    player.play();
+    el.innerText = "music:on";
+  }
+  playing = !playing;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+</body>
+</html>

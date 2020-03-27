@@ -1,0 +1,535 @@
+<html>
+<head>
+<title>Space N Vaders Game</title>
+<link href="https://fonts.googleapis.com/css?family=Audiowide&display=swap" rel="stylesheet">
+</head>
+<body>
+
+
+
+
+
+<style>
+
+
+
+body{
+		margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+
+
+
+
+
+
+
+
+.canvas{
+	width: 100%;
+	height: 600px;
+	margin: 0 auto;
+	
+}
+
+.canvas canvas{
+	margin-left: 27% ;
+}
+h1 {
+	text-align: center;
+}
+
+
+
+#myCanvas{
+	margin-left: 32%;
+	
+		display: none;
+}
+
+
+
+.text {
+	width: 600px;
+	height: 30px;
+	margin: 0 auto;
+		text-align: center;
+
+	
+	
+}
+
+.inner-text{
+
+	width: 600px;
+	height: 30px;
+	text-align: center;
+	
+}
+
+.inner-text  ul li {
+	display: inline-block;
+	
+	}
+	
+.inner-text ul {
+margin: 7px 0px 0px 56px;
+}
+
+
+.inner-text li {
+
+	margin-right: 100px;
+	border-radius: 10px;
+	width: 100px;
+	    height: 24px;
+
+	    border: solid 2px #8c9fa3;
+	     background: #2e576b;
+	list-style: none;
+	text-decoration: none;
+
+}
+.inner-text li a{
+	text-align: center;
+		text-decoration: none;
+		color:#00b4e0;  
+		font-family: 'Audiowide', cursive;
+}
+
+
+
+
+
+.inner-text li:hover {
+	  text-shadow: 1px 1px 2px #4655ff, 0 0 20px #101010, 0 0 30px #101010, 0 0 40px #101010, 0 0 50px #938cff, 0 0 60px #9052ad, 0 0 70px #9052ad;
+	border: solid 3px white;
+	border-right: 2px;
+	border-left: 2px;
+	
+	
+}
+
+
+
+.container {
+	width: 100%;
+	height: 700px;
+	background: url('img/bg.png');
+	
+}
+
+
+
+
+</style>
+
+
+
+<div class="container">
+
+
+
+<audio src="sound/piu.mp3" autoplay="autoplay"></audio>
+<p keydown="soundClick()"></p>
+
+
+
+
+<audio src="sound/fon.mp3" autoplay="play"></audio>
+<p keydown="sound()"></p>
+
+
+
+
+
+
+
+
+
+
+
+
+<h1>Космические Захватчики</h1>
+<div class="canvas">
+	
+<canvas id="canvas" width="600" height="400" style="text-align: center;">
+	
+</canvas>
+
+<div class="text">
+		<div class="inner-text">
+		<ul>
+			<li><a href="index2.html"  onMouseOver="playAudio();">Exit</a></li>
+		<li><a href="#" class="myLink"  onMouseOver="playAudio();" id="btn-play" >music</a></li>
+		</ul>
+</div>
+	</div>
+</div>
+
+<canvas id="myCanvas" width="600" height="320" ></canvas>
+</div>
+<script src='js/script.js'></script>
+
+</div>
+
+
+<script language="JavaScript">
+
+var can = document.getElementById("canvas");
+var c = can.getContext('2d');
+
+/*
+счетчик*/
+
+let score = 0;
+
+
+
+player.width = 46;
+player.height = 46;
+ 
+// новый код
+var ship_image;
+var bomb_image;
+var bullet_image;
+ 
+loadResources();
+ 
+function loadResources() {
+  ship_image = new Image();
+  ship_image.src = "img/hunter1.png";
+ 
+  bomb_image = new Image();
+  bomb_image.src = "img/bomb.png";
+ 
+  bullet_image = new Image();
+  bullet_image.src = "img/bullets.png";
+}
+
+
+
+
+function mainLoop() {
+	var c = can.getContext('2d');
+
+	updateGame();
+	updateBackground();
+	updateEnemies();
+	updatePlayer();
+	
+	updatePlayerBullets();
+	updateEnemyBullets();
+
+	checkCollisions();
+	
+	drawBackground(c);
+	drawEnemies(c);
+	drawPlayer(c);
+	drawEnemyBullets(c);
+	drawPlayerBullets(c);
+	drawOverlay(c);
+	drawscore(c);
+
+
+}
+
+
+// =========== player ============
+
+function firePlayerBullet() {
+  // создаём новую пулю
+  playerBullets.push({
+    x: player.x,
+    x: player.x+14,
+    y: player.y - 5,
+    width:10,
+    height:10,
+    width:20,
+    height:20,
+    counter:0,
+  });
+}
+
+
+
+
+
+
+function drawPlayer(c) {
+  if(player.state == "dead") return;
+ 
+  if(player.state == "hit") {
+    c.fillStyle = "black";
+    c.fillRect(player.x,player.y, player.width, player.height);
+    drawPlayerExplosion(c);
+    return;
+  }
+  c.drawImage(ship_image,
+    25,1, 23,23, // исходные координаты
+    player.x, player.y, player.width, player.height // конечные координаты
+  );
+
+
+
+
+
+
+}
+
+
+
+
+var particles = [];
+function drawPlayerExplosion(c) {
+  // старт
+  if(player.counter == 0) {
+    particles = []; // стираем все старые значения
+    for(var i = 0; i<50; i++) {
+      particles.push({
+        x: player.x + player.width/2,
+        y: player.y + player.height/2,
+        xv: (Math.random()-0.5)*2.0*5.0,  // скорость по x
+        yv: (Math.random()-0.5)*2.0*5.0,  // скорость по y
+        age: 0,
+     });
+  }
+}
+
+
+
+
+  if(player.counter > 0) {
+    for(var i=0; i<particles.length; i++) {
+      var p = particles[i];
+      p.x += p.xv;
+      p.y += p.yv;
+      var v = 255-p.age*3;
+      c.fillStyle = "rgb("+v+","+v+","+v+")";
+      c.fillRect(p.x,p.y,3,3);
+      p.age++;
+    }
+  }
+};
+
+
+
+
+
+
+function drawscore(c){
+c.fillStyle = "white";
+	c.font = "50px Arial";
+	c.fillText(score, 20, 380);
+
+
+}
+
+
+
+
+function drawPlayerBullets(c) {
+  c.fillStyle = "blue";
+  for(i in playerBullets) {
+    var bullet = playerBullets[i];
+    var count = Math.floor(bullet.counter/4);
+    var xoff = (count%4)*24;
+    //c.fillRect(bullet.x, bullet.y, bullet.width,bullet.height);
+    c.drawImage(
+      bullet_image,
+      xoff+10,0+9,8,8,
+      bullet.x,bullet.y,bullet.width,bullet.height
+    );
+  }
+}
+
+// =========== background ============
+
+function drawBackground(c) {
+	c.fillStyle = "black";
+	c.fillRect(0,0,can.width,can.height);
+
+}
+
+
+
+
+
+// =========== enemies ===============
+
+function drawEnemies(c) {
+  for(var i in enemies) {
+    var enemy = enemies[i];
+    if(enemy.state == "alive") {
+      c.fillStyle = "green";
+      drawEnemy(c,enemy,15);
+    }
+    if(enemy.state == "hit") {
+      c.fillStyle = "purple";
+      enemy.shrink--;
+      score++;
+      drawEnemy(c,enemy,enemy.shrink);
+
+    }
+
+  
+    // вероятно, никогда не будет вызвана
+    if(enemy.state == "dead") {
+      c.fillStyle = "black";
+      c.drawEnemy(c,enemy,15);
+    }
+  }
+} 
+
+
+function drawEnemy(c,enemy,radius) {
+  if(radius <=0) radius = 1;
+  var theta = enemy.counter;
+  c.save();
+  c.translate(0,30);
+  // рисуем фоновый круг
+  circlePath(c, enemy.x, enemy.y, radius*2);
+  c.fill();
+  // рисуем волнистые точки
+  for(var i=0; i<10; i++) {
+    var xoff = Math.sin(toRadians(theta+i*36*2))*radius;
+    var yoff = Math.sin(toRadians(theta+i*36*1.5))*radius;
+    circlePath(c, enemy.x + xoff, enemy.y + yoff, 3);
+    c.fillStyle = "white";
+    c.fill();
+  }
+  c.restore();
+}
+function toRadians(d) {
+  return d * Math.PI * 2.0 / 360.0;
+}
+function circlePath(c, x, y, r) {
+  c.beginPath();
+  c.moveTo(x,y);
+  c.arc(x,y, r, 0, Math.PI*2);
+}
+
+
+function createEnemyBullet(enemy) {
+  return {
+    x:enemy.x,
+    y:enemy.y+enemy.height,
+    width:4,
+    height:12,
+    width:30,
+    height:30,
+    counter:0,
+  }
+}
+ 
+function drawEnemyBullets(c) {
+  for(var i in enemyBullets) {
+    var bullet = enemyBullets[i];
+    c.fillStyle = "black";
+    c.fillRect(bullet.x, bullet.y , bullet.width, bullet.height);
+    var xoff = (bullet.counter%9)*12 + 1;
+    var yoff = 1;
+    c.drawImage(bomb_image,
+      xoff,yoff,11,11,
+      bullet.x,bullet.y,bullet.width,bullet.height
+    );
+  }
+}
+
+
+// =========== overlay ===============
+
+function drawOverlay(c) {
+  if(overlay.counter == -1) return;
+ 
+  // появление
+  var alpha = overlay.counter/50.0;
+  if(alpha > 1) alpha = 1;
+  c.globalAlpha = alpha;
+ 
+  c.save();
+  c.fillStyle = "white";
+  c.font = "Bold 40pt Arial";
+  c.fillText(overlay.title,140,200);
+  c.font = "14pt Arial";
+  c.fillText(overlay.subtitle, 190,250);
+  c.restore();
+}
+
+doSetup();
+setInterval(mainLoop,1000/30);
+
+
+
+
+
+
+
+
+
+
+</script>
+
+<script type="text/javascript">
+function playAudio(){
+var myAudio = new Audio;
+myAudio.src = "sound/click.wav";
+myAudio.play();
+}
+
+
+
+
+var el = document.getElementById('btn-play');
+var playing = false; // текущее состояние плеера
+
+var players = new Audio();
+players.src = 'sound/cos.wav';
+players.preload = "auto";
+players.addEventListener('ended', function(){ // слушаем окончание трека
+  el.innerText = "Done";
+  playing = false;
+});
+el.addEventListener('click', playPause); // слушаем нажатие на кнопку
+
+function playPause() {
+  if( playing) {
+    players.pause();
+    el.innerText = "music:off";
+  } else {
+    players.play();
+    el.innerText = "music:on";
+  }
+  playing = !playing;
+}
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
