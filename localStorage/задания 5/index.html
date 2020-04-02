@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	 <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker..."></script>
+<script src="jc.js"></script>
+</head>
+<body>
+	
+
+
+
+
+
+<div class="block">
+
+<div class="main">
+<div>
+<h2>Записная книжка</h2>
+<p><input class="theme" placeholder="Название записи"/></p>
+<p><textarea rows="8" cols="30" class="text" placeholder="Текст записи"></textarea></p>
+<p><input type="button" class="button" value="Добавить запись"/></p>
+
+<div class="records">
+<h2 class="recordsTitle">Записи</h2>
+</div>
+</div>
+<div>
+<h2>Календарь</h2>
+<p><input type="text" class="form-control" id="date" name="date" placeholder="Дата" required></p>
+<textarea class="dateText" cols="30" rows="8" placeholder="Заметка к дате"></textarea><br/><br>
+<!— <input type="button" value="Добавить" class="dateButton"/>-->
+
+</div>
+<div>
+<h2>Контакты</h2>
+<p><input type="text" class="name" placeholder="Имя абонента" ></p>
+<p><input type="number" class="phone" placeholder="Номер абонента" ></p>
+<input type="button" value="Добавить" class="phonesButton"/>
+<div class="phones">
+<h2 class="phonesTitle">Телефонные номера</h2>
+</div>
+
+</div>
+</div>
+        
+		</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		<style >
+
+
+.recordsTitle, .phonesTitle{display:none;}
+.red{color: #ff0000;}
+.main>div{float:left;margin-left:30px;}
+
+
+
+			body{
+				margin:0;
+				padding: 0;
+				
+			}
+			#texter{
+				font-size: 20px;
+				font-family: arial;
+				color: #9e0099;
+				width: 400px;
+				height: 200px;
+			}
+
+
+
+			.block{
+				width: 100%;
+				height: 600px;
+				background: #00b15f;
+			}
+
+
+			p{
+				text-align: center;
+				margin:0;
+			}
+
+
+			 .block button {
+			 	display: inline-block;
+			 }
+		</style>
+
+		
+</body>
+</html>
