@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	
+</head>
+<body>
+
+
+
+<div id="div">
+		<p> абзац c v-once:</p>
+		<p v-once>{{ text }}</p>
+		<p>Абзац без v-once:</p>
+		<p>{{ text }}</p>
+		<button v-on:click="changeText">поменять текст </button>
+	</div>
+
+
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<script src ="jc.js"></script>
+</body>
+</html>

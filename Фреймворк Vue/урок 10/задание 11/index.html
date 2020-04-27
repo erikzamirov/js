@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	
+</head>
+<body>
+	
+	
+<div id="app">
+		<select v-model="select">
+			<option v-for="option in options">{{ option }}</option>
+		</select>
+		<p> Ваш выбор: {{ select }}</p>
+	</div>
+
+
+
+
+
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<script src ="jc.js"></script>
+</body>
+</html>

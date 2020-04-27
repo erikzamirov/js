@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	
+</head>
+<body>
+	
+	<div id="app">
+		<input type="checkbox" v-model="str" value="1">один</input>
+		<input type="checkbox" v-model="str" value="2">два</input>
+		<input type="checkbox" v-model="str" value="3">три</input>
+		<input type="checkbox" v-model="str" value="4">четыри</input>
+		<ul>
+			<li v-for="el in str">{{ el}}</li>
+		</ul>
+	</div>
+
+
+
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<script src ="jc.js"></script>
+</body>
+</html>
